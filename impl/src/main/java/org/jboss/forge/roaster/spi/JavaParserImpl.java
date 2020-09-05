@@ -18,6 +18,7 @@ import org.eclipse.jdt.core.dom.AnnotationTypeDeclaration;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.EnumDeclaration;
 import org.eclipse.jdt.core.dom.PackageDeclaration;
+import org.eclipse.jdt.core.dom.RecordDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.CompilationResult;
 import org.eclipse.jdt.internal.compiler.ast.ConstructorDeclaration;
@@ -33,6 +34,7 @@ import org.jboss.forge.roaster.model.impl.JavaClassImpl;
 import org.jboss.forge.roaster.model.impl.JavaEnumImpl;
 import org.jboss.forge.roaster.model.impl.JavaInterfaceImpl;
 import org.jboss.forge.roaster.model.impl.JavaPackageInfoImpl;
+import org.jboss.forge.roaster.model.impl.JavaRecordImpl;
 import org.jboss.forge.roaster.model.impl.JavaUnitImpl;
 import org.jboss.forge.roaster.model.source.JavaAnnotationSource;
 import org.jboss.forge.roaster.model.source.JavaClassSource;
@@ -128,6 +130,11 @@ public class JavaParserImpl implements JavaParser
       {
          PackageDeclaration packageDeclaration = (PackageDeclaration) declaration;
          return new JavaPackageInfoImpl(enclosingType, document, unit, packageDeclaration);
+      }
+      else if (declaration instanceof RecordDeclaration)
+      {
+         RecordDeclaration recordDeclaration = (RecordDeclaration) declaration;
+         return new JavaRecordImpl(enclosingType, document, unit, recordDeclaration);
       }
       else
       {
